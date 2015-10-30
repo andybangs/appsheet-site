@@ -1,0 +1,8 @@
+/* Component styles are declared inline in jsx */
+
+html {
+  position: relative;
+  min-height: 100%;
+  /* Accomodates sticky footer in MainContainer.js */
+  padding-bottom: 40px;
+}

@@ -1,0 +1,12 @@
+# Node
+node_modules
+npm-debug.log
+
+# Compiled JS
+public/bundle.js
+
+# WebStorm
+.idea
+
+# OSX
+.DS_Store
