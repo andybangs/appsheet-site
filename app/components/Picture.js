@@ -5,24 +5,33 @@ class Picture extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      hover: false,
       showModal: false,
     };
   }
 
   render() {
+    const hover = this.state.hover ? styles.hover : styles.leave;
+
     return (
       <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-        <img src={this.props.picture.picture}
-          onClick={this.open.bind(this)}
-          className="img-thumbnail img-responsive center-block"
-          style={styles.image} />
-        <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+        <div style={hover}>
+          <img src={this.props.picture.picture}
+            onMouseEnter={this.toggleHover.bind(this)}
+            onMouseLeave={this.toggleHover.bind(this)}
+            onClick={this.toggleModal.bind(this)}
+            className="img-thumbnail img-responsive center-block"
+            style={styles.image} />
+        </div>
+        <Modal show={this.state.showModal} onHide={this.toggleModal.bind(this)}>
+          <Modal.Header closeButton>
+            <Modal.Title style={styles.modalText}>Image {this.props.number}</Modal.Title>
+          </Modal.Header>
           <Modal.Body>
             <img src={this.props.picture.picture}
-              onClick={this.open.bind(this)}
               className="img-rounded img-responsive center-block" />
           </Modal.Body>
-          <Modal.Footer style={styles.modalFooter}>
+          <Modal.Footer style={styles.modalText}>
             <p>{this.props.picture.text}</p>
           </Modal.Footer>
         </Modal>
@@ -30,17 +39,18 @@ class Picture extends React.Component{
     );
   }
 
-  close() {
-    this.setState({ showModal: false });
+  toggleHover() {
+    this.setState({ hover: !this.state.hover });
   }
 
-  open() {
-    this.setState({ showModal: true });
+  toggleModal() {
+    this.setState({ showModal: !this.state.showModal });
   }
 }
 
 Picture.propTypes = {
   picture: React.PropTypes.object.isRequired,
+  number: React.PropTypes.number.isRequired,
 };
 
 const styles = {
@@ -49,8 +59,15 @@ const styles = {
     height: 175,
     objectFit: 'cover',
     marginBottom: 10,
+    cursor: 'pointer',
   },
-  modalFooter: {
+  hover: {
+    opacity: 0.6,
+  },
+  leave: {
+    opacity: 1,
+  },
+  modalText: {
     textAlign: 'center',
   },
 };

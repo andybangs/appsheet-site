@@ -29,7 +29,7 @@ class AppSheetSite extends React.Component{
   render() {
     if (this.state.isLoading === false) {
       const pictures = this.state.pictures.map((picture, index) => {
-        return <Picture key={index} picture={picture} />;
+        return <Picture key={index} picture={picture} number={index + 1} />;
       });
 
       return <MainContainer content={pictures} />;
