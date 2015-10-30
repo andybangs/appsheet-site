@@ -44,7 +44,10 @@ class Picture extends React.Component{
   }
 
   toggleModal() {
-    this.setState({ showModal: !this.state.showModal });
+    this.setState({
+      showModal: !this.state.showModal,
+      hover: false,
+    });
   }
 }
 
